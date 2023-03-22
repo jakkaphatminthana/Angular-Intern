@@ -1,0 +1,106 @@
+<!-- <p>profile works!</p>
+<app-card></app-card> -->
+
+<div class="container">
+    <div class="row mt-5">
+        <!-- TODO 1: Profile Zone -->
+        <div class="col-lg-3 col-sm-12">
+            <div class="row justify-content-center">
+                <!-- 1.1 Image -->
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <img src="data:image/png;base64,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"
+                        class="rounded-circle" width="150" height="150">
+                </div>
+
+                <!-- 1.2 Select file -->
+                <div class="mt-3 col-9 col-sm-4 col-lg-12 mb-0">
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TODO 2: Form Zone -->
+        <div class="col-12  col-sm-12 col-lg-9">
+            <div class="row">
+
+                <!--2.1.1 คำนำหน้า-->
+                <label for="inputMName" class="mt-3 col-3 col-sm-2 col-lg-2 col-form-label d-flex justify-content-end">
+                    คำนำหน้า
+                </label>
+                <div class="mt-3 col-9 col-sm-2 col-lg-2">
+                    <select class="form-select" aria-label="Default select example" id="inputMName">
+                        <option selected>Please select</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                    </select>
+                </div>
+
+                <!--2.1.2 ชื่อ-->
+                <label for="inputFName" class="mt-3 col-3 col-sm-1 col-lg-1 col-form-label d-flex justify-content-end">
+                    ชื่อ
+                </label>
+                <div class="mt-3 col-9 col-sm-3 col-lg-3">
+                    <input type="text" class="form-control" id="inputFName">
+                </div>
+
+                <!--2.1.3 นามสกุล-->
+                <label for="inputLName" class="mt-3 col-3 col-sm-1 col-lg-1 col-form-label d-flex justify-content-end">
+                    นามสกุล
+                </label>
+                <div class="mt-3 col-9 col-sm-3 col-lg-3">
+                    <input type="text" class="form-control" id="inputLName">
+                </div>
+
+                <!--2.2.1 วันเกิด -->
+                <label for="inputBirth" class="mt-3 col-3 col-sm-2 col-lg-2 col-form-label d-flex justify-content-end">
+                    วันเกิด
+                </label>
+                <div class="mt-3 col-9 col-sm-4 col-lg-2">
+                    <input type="date" class="form-control" id="inputBirth">
+                </div>
+
+                <!--2.2.2 อีเมล -->
+                <label for="inputEmail" class="mt-3 col-3 col-sm-auto col-lg-1 col-form-label d-flex justify-content-end">
+                    อีเมล
+                </label>
+                <div class="mt-3 col-9 col-sm-5 col-lg-7">
+                    <input type="email" class="form-control" id="inputEmail">
+                </div>
+
+                <!--2.3 ที่อยู่ -->
+                <label for="inputAddress" class="mt-3 col-3 col-sm-2 col-lg-2 col-form-label d-flex justify-content-end">
+                    ที่อยู่
+                </label>
+                <div class="mt-3 col-9 col-sm-10 col-lg-10">
+                    <div class="input-group">
+                        <textarea class="form-control" id="inputAddress" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <!--2.4.1 โทรศัพท์ -->
+                <label for="inputPhone" class="mt-3 col-3 col-sm-2 col-lg-2 col-form-label d-flex justify-content-end">
+                    โทรศัพท์
+                </label>
+                <div class="mt-3 col-3 col-sm-3 col-lg-1">
+                    <input type="text" class="form-control" id="inputPhone1">
+                </div>
+                <div class="mt-3 col-6 col-sm-7 col-lg-3">
+                    <input type="text" class="form-control" id="inputPhone2">
+                </div>
+
+                <!--2.4.2 แฟกซ์ -->
+                <label for="inputFank" class="mt-3 col-3 col-sm-2 col-lg-2 col-form-label d-flex justify-content-end">
+                    แฟกซ์
+                </label>
+                <div class="mt-3 col-3 col-sm-3 col-lg-1">
+                    <input type="text" class="form-control" id="inputFank">
+                </div>
+                <div class="mt-3 col-6 col-sm-7 col-lg-3">
+                    <input type="text" class="form-control" id="inputFank">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

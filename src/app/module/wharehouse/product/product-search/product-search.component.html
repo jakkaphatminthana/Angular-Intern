@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <!-- Card 1 --------------------------------------------------------------------------->
+            <div class="card">
+                <div class="card-header">
+                    <label class="col-form-label">เงื่อนไขการค้นหา</label>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formCriteria" (ngSubmit)="search()" #formSearch="ngForm"
+                        (change)="productFromChange()">
+                        <div class="row">
+                            <div class="col-2">
+                                <label class="col-form-label">สินค้าตั้งต้น</label>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-select" formControlName="productFrom"
+                                    [ngClass]="{'is-invalid': formSearch.submitted && formCriteria.get('productFrom')?.errors}">
+                                    <option *ngFor="let productFrom of productsFrom" [value]="productFrom.barcode">
+                                        {{productFrom.barcode}} - {{productFrom.productName}}
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formSearch.submitted && formCriteria.get('productFrom')?.hasError('required')">
+                                    กรุณาเลือก
+                                </div>
+                            </div>
+
+                            <div class="offset-1 col-1">
+                                <label class=" col-form-label">ถึง</label>
+                            </div>
+                            <div class="col-4">
+                                <select class="form-select" formControlName="productTo" (change)="productToChange()"
+                                    [ngClass]="{'is-invalid': formSearch.submitted && formCriteria.get('productTo')?.errors}">
+                                    <option *ngFor="let productTo of productsTo" [value]="productTo.barcode">
+                                        {{productTo.barcode}} - {{productTo.productName}}
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formSearch.submitted && formCriteria.get('productTo')?.hasError('required')">
+                                    กรุณาเลือก
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-5 mb-3">
+                            <button type="submit" class="btn btn-sm btn-primary me-3 ps-4 pe-4"> ค้นหา </button>
+                            <button class="btn btn-sm btn-primary me-3 ps-4 pe-4" (click)="clear()"> ล้าง </button>
+                            <button class="btn btn-sm btn-primary me-3 ps-4 pe-4" [routerLink]="['/wharehouse/product/create']">
+                                เพิ่ม </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Card 2 --------------------------------------------------------------------------->
+            <div class="card mt-5">
+
+                <div class="card-header">
+                    <label class="col-form-label">รายการคลังสินค้า</label>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Barcode</th>
+                                <th scope="col">ประเภทสินค้า</th>
+                                <th scope="col">ชื่อสินค้า</th>
+                                <th scope="col">รายละเอียด</th>
+                                <th scope="col"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of productsList">
+                                <th scope="row">{{product.barcode}}</th>
+                                <td>{{typeToDescription(product.productTypeId)}}</td>
+                                <td>{{product.productName}}</td>
+                                <td>{{product.productDescription}}</td>
+                                <td><a [routerLink]="['/wharehouse/product/edit/' + product.barcode]">Edit</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

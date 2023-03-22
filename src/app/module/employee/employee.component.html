@@ -1,0 +1,333 @@
+<div class="container">
+    <div class="form-label text-center mt-3">
+        <h1> โปรแกรมบันทึกข้อมูลพนักงาน </h1>
+    </div>
+    <div class="row">
+        <div class="col-6" *ngFor="let employee of employees; let i = index;">
+            <div class="card mt-3">
+                <!-- TODO 1: Header Card -->
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-8">{{employee.empCode}}: {{employee.empPreName}}{{employee.empName}}</div>
+                        <div class="col-2">
+                            <button class="btn btn-sm btn-primary w-100" *ngIf="editRow == null"
+                                (click)="edit(i, employee)">
+                                แก้ไข </button>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-sm btn-primary w-100" *ngIf="editRow != null && editRow == i"
+                                (click)="save()">
+                                บันทึก </button>
+                            <button class="btn btn-sm btn-danger w-100" *ngIf="editRow == null" (click)="delete(i)">
+                                ลบ </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" [formGroup]=" groupEmpoyee">
+                    <div class="row">
+                        <div class="col-7">
+                            <!-- TODO 2.1: Detail Show --------------------------------------------------->
+                            <div class="row">
+                                <div class="mb-2 form-label" *ngIf="editRow != i"> <b>รหัสพนักงาน:</b>
+                                    {{employee.empCode}}
+                                </div>
+                                <div class="mb-2 form-label" *ngIf="editRow != i"> <b>ชื่อพนักงาน:</b>
+                                    {{employee.empPreName}}{{employee.empName}}
+                                </div>
+                                <div class="mb-2 form-label" *ngIf="editRow != i"> <b>ตำแหน่ง:</b> {{employee.empRole}}
+                                </div>
+                                <div class="mb-2 form-label" *ngIf="editRow != i"> <b>อายุงาน:</b> {{employee.empYear}}
+                                    ปี
+                                </div>
+                                <div class="mb-2 form-label" *ngIf="editRow != i"> <b>เงินเดือน:</b>
+                                    {{employee.empSalary}}
+                                    บาท</div>
+                                <div class="mb-2 form-label" *ngIf="editRow != i"> <b>อื่นๆ:</b> {{employee.empOther}}
+                                </div>
+                            </div>
+
+
+                            <!-- TODO 2.2: Detail Edit Mode ---------------------------------------------->
+                            <div class="row" *ngIf="editRow == i">
+                                <label class="col-4 col-form-label mb-2"> <b>รหัสพนักงาน:</b></label>
+                                <div class="col-8">
+                                    <input class="form-control" formControlName="empCode"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empCode')?.errors}">
+                                </div>
+                                <div class="invalid-feedback mb-2"
+                                    *ngIf="groupEmpoyee.get('empCode')?.hasError('required')">
+                                    กรุณากรอกข้อมูล
+                                </div>
+                                <div class="invalid-feedback mb-2"
+                                    *ngIf="groupEmpoyee.get('empCode')?.hasError('minlength')">
+                                    ต้องป้อนข้อมูลมากกว่า 2 ตัว
+                                </div>
+                                <div class="invalid-feedback mb-2"
+                                    *ngIf="groupEmpoyee.get('empCode')?.hasError('maxlength')">
+                                    ต้องป้อนข้อมูลไม่เกิน 5 ตัว
+                                </div>
+
+                                <label class="col-4 col-form-label mb-2"> <b>ชื่อพนักงาน:</b></label>
+                                <div class="col-2">
+                                    <select class="form-select" formControlName="empPreName"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empPreName')?.errors}">
+                                        <option value="นาย">นาย</option>
+                                        <option value="นาง">นาง</option>
+                                    </select>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empPreName')?.hasError('required')">
+                                        เลือกด้วย
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" formControlName="empName"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empName')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empName')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empName')?.hasError('maxlength')">
+                                        กรอกข้อมูลไม่เกิน 60 ตัว
+                                    </div>
+                                </div>
+
+                                <label class="col-4 col-form-label mb-2"> <b>ตำแหน่ง:</b></label>
+                                <div class="col-8">
+                                    <select class="form-select" formControlName="empRole"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empRole')?.errors}">
+                                        <option value="Developer">Developer</option>
+                                        <option value="Tester">Tester</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empRole')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                </div>
+
+                                <label class="col-4 col-form-label mb-2"> <b>อายุงาน:</b></label>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" formControlName="empYear"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empYear')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empYear')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empYear')?.hasError('min')">
+                                        กรุณากรอกอายุมากกว่า 1 ปี
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empYear')?.hasError('max')">
+                                        กรอกอายุน้อนกว่า 99 ปี
+                                    </div>
+                                </div>
+                                <label class="col-2 col-form-label">ปี</label>
+
+                                <label class="col-4 col-form-label mb-2"> <b>เงินเดือน:</b></label>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" formControlName="empSalary"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empSalary')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empSalary')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empSalary')?.hasError('min')">
+                                        กรอกข้อมูลมากกว่า 1 บาท
+                                    </div>
+                                </div>
+                                <label class="col-2 col-form-label">บาท</label>
+
+                            </div>
+                        </div>
+                        <div class="col-5 justify-content-center">
+                            <!-- TODO 3.1: Image Show ---------------------------------------------------->
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <img src="https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
+                                        class="rounded-circle" width="110" height="110"
+                                        *ngIf="employee.empImage == null">
+
+                                    <img src="{{employee.empImage}}" class="rounded-circle" width="110" height="110"
+                                        *ngIf="employee.empImage != null">
+                                </div>
+                                <!-- TODO 3.2: Image Edit Mode -->
+                                <div class="col-12 justify-content-center mt-3" *ngIf="editRow == i">
+                                    <input class="form-control" type="file" formControlName="empImage">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- TODO 4: Edit Mode พิเศษ ---------------------------------------------------->
+                        <div class="col-12" *ngIf="editRow == i">
+                            <div class="row">
+                                <label class="col-2 col-form-label mb-2"> <b>อื่นๆ:</b></label>
+                                <div class="col-9 ms-3 mb-3">
+                                    <div class="input-group">
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- TODO 5: Mode Add ---------------------------------------------------------------------------->
+        <div class="col-6" *ngIf="FormMode == 'add'">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="offset-lg-10 col-2">
+                            <button class="btn btn-sm btn-primary w-100" (click)="save()">บันทึก </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" [formGroup]=" groupEmpoyee">
+                    <div class="row">
+                        <div class="col-7">
+                            <!-- 5.1: Detail-->
+                            <div class="row">
+                                <label class="col-4 col-form-label mb-2"> <b>รหัสพนักงาน:</b></label>
+                                <div class="col-8">
+                                    <input class="form-control" formControlName="empCode"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empCode')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empCode')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empCode')?.hasError('minlength')">
+                                        ต้องป้อนข้อมูลมากกว่า 2 ตัว
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empCode')?.hasError('maxlength')">
+                                        ต้องป้อนข้อมูลไม่เกิน 5 ตัว
+                                    </div>
+                                </div>
+
+                                <label class="col-4 col-form-label mb-2"> <b>ชื่อพนักงาน:</b></label>
+                                <div class="col-3">
+                                    <select class="form-select" formControlName="empPreName"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empPreName')?.errors}">
+                                        <option value="นาย">นาย</option>
+                                        <option value="นาง">นาง</option>
+                                    </select>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empPreName')?.hasError('required')">
+                                        เลือกด้วย
+                                    </div>
+                                </div>
+
+                                <div class="col-5">
+                                    <input class="form-control" formControlName="empName"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empName')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empName')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empName')?.hasError('maxlength')">
+                                        กรอกข้อมูลไม่เกิน 60 ตัว
+                                    </div>
+                                </div>
+
+                                <label class="col-4 col-form-label mb-2"> <b>ตำแหน่ง:</b></label>
+                                <div class="col-8">
+                                    <select class="form-select" formControlName="empRole"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empRole')?.errors}">
+                                        <option value="Developer">Developer</option>
+                                        <option value="Tester">Tester</option>
+                                        <option value="Business">Business</option>
+                                    </select>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empRole')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                </div>
+
+                                <label class="col-4 col-form-label mb-2"> <b>อายุงาน:</b></label>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" formControlName="empYear"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empYear')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empYear')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empYear')?.hasError('min')">
+                                        กรุณากรอกอายุมากกว่า 1 ปี
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empYear')?.hasError('max')">
+                                        กรอกอายุน้อนกว่า 99 ปี
+                                    </div>
+                                </div>
+                                <label class="col-2 col-form-label">ปี</label>
+
+                                <label class="col-4 col-form-label mb-2"> <b>เงินเดือน:</b></label>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" formControlName="empSalary"
+                                        [ngClass]="{'is-invalid': groupEmpoyee.get('empSalary')?.errors}">
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empSalary')?.hasError('required')">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                    <div class="invalid-feedback mb-2"
+                                        *ngIf="groupEmpoyee.get('empSalary')?.hasError('min')">
+                                        กรอกข้อมูลมากกว่า 1 บาท
+                                    </div>
+                                </div>
+                                <label class="col-2 col-form-label">บาท</label>
+
+                            </div>
+                        </div>
+                        <div class="col-5 justify-content-center">
+                            <!-- 5.2: Image -->
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <img [src]="groupEmpoyee.value.empImage
+                                    ? groupEmpoyee.value.empImage
+                                    : 'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png'"
+                                        class="rounded-circle" width="110" height="110">
+                                </div>
+                                <!-- 5.3: Select File -->
+                                <div class="col-12 justify-content-center mt-3">
+                                    <input class="form-control" type="file" accept=".png,.jpg" (change)="uploadImage($event)">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- 5.4: Other input -->
+                        <div class="col-12">
+                            <div class="row">
+                                <label class="col-2 col-form-label mb-2"> <b>อื่นๆ:</b></label>
+                                <div class="col-9 ms-3 mb-3">
+                                    <div class="input-group">
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-2 ">
+            <button class="btn btn-sm btn-primary w-100" (click)="add()" *ngIf="FormMode == null">
+                เพิ่มข้อมูล </button>
+        </div>
+    </div>
+
+</div>

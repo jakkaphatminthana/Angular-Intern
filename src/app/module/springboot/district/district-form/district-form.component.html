@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <form [formGroup]="formData" (ngSubmit)="save(formAdd.value)" #formAdd="ngForm">
+                    <div class="card-header">
+                        <label class="col-form-label"><b>เพิ่ม/แก้ไข ข้อมูลอำเภอ</b> </label>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Id --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">รหัสอำเภอ</label>
+                                <input type="text" class="form-control" formControlName="districtId"
+                                    [readOnly]="districtId?true:false"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('districtId')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtId')?.hasError('minlength')">
+                                    ป้อนข้อมูล 3 ตัวขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtId')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 10 ตัว
+                                </div>
+                            </div>
+
+                            <!-- Province --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">เลือกจังหวัด</label>
+                                <select class="form-select" formControlName="provinceId"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('provinceId')?.errors}">
+                                    <option *ngFor="let provinceName of provinceData" [value]="provinceName.provinceId">
+                                        {{provinceToDescription(provinceName.provinceId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('provinceId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Name --------------------------------------------------------------------------->
+                            <div class="col-6 mb-3">
+                                <label class="form-label">ชื่ออำเภอ</label>
+                                <input type="text" class="form-control" formControlName="districtName"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('districtName')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtName')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtName')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 100 ตัวอักษร
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-end mt-2 mb-3">
+                            <button type="submit" class="btn btn-sm btn-success me-2 ps-3 pe-3"> บันทึก </button>
+                            <button class="btn btn-sm btn-danger me-2 ps-3 pe-3" *ngIf="districtId" (click)="remove()">
+                                ลบ
+                            </button>
+                            <button class="btn btn-sm btn-secondary me-2 ps-3 pe-3"
+                                [routerLink]="['/springboot/district']">
+                                ยกเลิก </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

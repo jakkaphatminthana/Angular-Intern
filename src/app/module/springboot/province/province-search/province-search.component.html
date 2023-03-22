@@ -1,0 +1,52 @@
+<div class="container">
+    <label class="fs-2 mt-5"> จัดการข้อมูลจังหวัด</label>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-sm btn-success me-3 ps-4 pe-4"
+                                [routerLink]="['/springboot/province/create']"> เพิ่ม </button>
+                        </div>
+                        <div class=" offset-5 col-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" style="height: 30px" placeholder="ชื่อจังหวัด"
+                                        [(ngModel)]="term" (input)="filter2()">
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-sm btn-primary w-100"> ค้นหา
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-sm btn-primary w-100" (click)="clear()"> ล้างค่า
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">รหัสจังหวัด</th>
+                                <th scope="col">ชื่อจังหวัด</th>
+                                <th scope="col">แก้ไข</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let province of provincesList">
+                                <th scope="row">{{province.provinceId}}</th>
+                                <td>{{province.provinceName}}</td>
+                                <td><a [routerLink]="['/springboot/province/edit/' + province.provinceId]">Edit</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

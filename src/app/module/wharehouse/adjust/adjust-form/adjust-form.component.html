@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <form [formGroup]="formData" (ngSubmit)="save()" #formAdd="ngForm">
+                    <div class="card-header">
+                        <label class="col-form-label"><b>เพิ่ม/แก้ไข จัดการคลัง</b> </label>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Id --------------------------------------------------------------------------->
+                            <div class="col-2">
+                                <label class="form-label">รหัส</label>
+                                <input type="text" class="form-control" formControlName="adjustId"
+                                    [readOnly]="adjustId?true:false"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('adjustId')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('adjustId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('adjustId')?.hasError('minlength')">
+                                    ป้อนข้อมูล 3 ตัวขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('adjustId')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 10 ตัว
+                                </div>
+                            </div>
+                            <!-- Product --------------------------------------------------------------------------->
+                            <div class="col-5">
+                                <label class="form-label">เลือกสินค้า</label>
+
+                                <select class="form-select" formControlName="barcode"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('barcode')?.errors}">
+                                    <option *ngFor="let product of productData"
+                                        [value]="product.barcode">{{barcodeToProductName(product.barcode)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('barcode')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+                            <!-- Store --------------------------------------------------------------------------->
+                            <div class="col-5">
+                                <label class="form-label">เลือกคลังจัดเก็บ</label>
+                                <select class="form-select" formControlName="storeId"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('storeId')?.errors}">
+                                    <option *ngFor="let store of storeData"
+                                        [value]="store.storeId">{{storeIdToStoreName(store.storeId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('storeId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Instock --------------------------------------------------------------------------->
+                            <div class="col-2 mt-3">
+                                <label class="form-label">สถานะ</label>
+
+                                <select class="form-select" formControlName="instock"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('instock')?.errors}">
+                                    <option value=true> เปิด </option>
+                                    <option value=false> ปิด </option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('instock')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Amount --------------------------------------------------------------------------->
+                            <div class="col-2 mt-3">
+                                <label class="form-label">จำนวน</label>
+                                <input type="number" class="form-control" formControlName="amount"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('amount')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('amount')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('amount')?.hasError('min')">
+                                    ป้อนจำนวนมากกว่า 1
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex justify-content-end mt-5 mb-3">
+                            <button type="submit" class="btn btn-sm btn-primary me-2 ps-3 pe-3"> บันทึก </button>
+                            <button class="btn btn-sm btn-primary me-2 ps-3 pe-3" *ngIf="adjustId" (click)="remove()">
+                                ลบ
+                            </button>
+                            <button class="btn btn-sm btn-primary me-2 ps-3 pe-3" [routerLink]="['/wharehouse/adjust']">
+                                ยกเลิก </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <form [formGroup]="formData" (ngSubmit)="save()" #formAdd="ngForm">
+                    <div class="card-header">
+                        <label class="col-form-label"><b>เพิ่ม/แก้ไข รหัสไปรษณีย์</b> </label>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Country --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">เลือกประเทศ</label>
+                                <select class="form-select" formControlName="countryId" (change)="countryChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('countryId')?.errors}">
+                                    <option *ngFor="let countryName of countryData" [value]="countryName.countryId">
+                                        {{countryToDescription(countryName.countryId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('countryId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Province --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">เลือกจังหวัด</label>
+                                <select class="form-select" formControlName="provinceId" (change)="provinceChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('provinceId')?.errors}"
+                                    [attr.disabled]="formData.value.countryId ? null : ''">
+                                    <option *ngFor="let provinceName of provinceData" [value]="provinceName.provinceId">
+                                        {{provinceToDescription(provinceName.provinceId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('provinceId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- District --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">เลือกอำเภอ</label>
+                                <select class="form-select" formControlName="districtId" (change)="districtChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('districtId')?.errors}"
+                                    [attr.disabled]="formData.value.provinceId ? null : ''">
+                                    <option *ngFor="let districtName of districtData" [value]="districtName.districtId">
+                                        {{districtToDescription(districtName.districtId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Sub District --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">เลือกตำบล</label>
+                                <select class="form-select" formControlName="sub_districtId" 
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('sub_districtId')?.errors}"
+                                    [attr.disabled]="formData.value.districtId ? null : ''">
+                                    <option *ngFor="let sub_districtName of sub_districtData" [value]="sub_districtName.sub_districtId">
+                                        {{subDistrictToDescription(sub_districtName.sub_districtId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('sub_districtId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Id --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">รหัสไปรษณีย์</label>
+                                <input type="text" class="form-control" formControlName="postcode"
+                                    [readOnly]="postcode?true:false"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('postcode')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('postcode')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('postcode')?.hasError('minlength')">
+                                    ป้อนข้อมูล 3 ตัวขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('postcode')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 10 ตัว
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="d-flex justify-content-end mt-2 mb-3">
+                            <button type="submit" class="btn btn-sm btn-success me-2 ps-3 pe-3"> บันทึก </button>
+                            <button class="btn btn-sm btn-danger me-2 ps-3 pe-3" *ngIf="postcode" (click)="remove()">
+                                ลบ
+                            </button>
+                            <button class="btn btn-sm btn-secondary me-2 ps-3 pe-3"
+                                [routerLink]="['/address/postcode']">
+                                ยกเลิก </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <form [formGroup]="formData" (ngSubmit)="save(formAdd.value)" #formAdd="ngForm">
+                    <div class="card-header">
+                        <label class="col-form-label"><b>เพิ่ม/แก้ไข ข้อมูลตำบล</b> </label>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Id --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">รหัสอำเภอ</label>
+                                <input type="text" class="form-control" formControlName="subDis_id"
+                                    [readOnly]="sub_districtId?true:false"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('subDis_id')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_id')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_id')?.hasError('minlength')">
+                                    ป้อนข้อมูล 1 ตัวขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_id')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 5 ตัว
+                                </div>
+                            </div>
+
+                            <!-- Zipcode --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">รหัสไปรษณีย์</label>
+                                <input type="text" class="form-control" formControlName="zipcode"
+                                    [readOnly]="sub_districtId?true:false"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('zipcode')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('zipcode')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('zipcode')?.hasError('minlength')">
+                                    ป้อนข้อมูล 1 ตัวขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('zipcode')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 5 ตัว
+                                </div>
+                            </div>
+
+
+                            <!-- District --------------------------------------------------------------------------->
+                            <div class="col-4 mb-3">
+                                <label class="form-label">เลือกอำเภอ</label>
+                                <select class="form-select" formControlName="districtId"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('districtId')?.errors}">
+                                    <option *ngFor="let districtName of districtData" [value]="districtName.districtId">
+                                        {{districtToDescription(districtName.districtId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Name TH--------------------------------------------------------------------------->
+                            <div class="col-6 mb-3">
+                                <label class="form-label">ชื่อตำบล (ไทย)</label>
+                                <input type="text" class="form-control" formControlName="subDis_nameTh"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('subDis_nameTh')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_nameTh')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_nameTh')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 100 ตัวอักษร
+                                </div>
+                            </div>
+
+                            <!-- Name EN--------------------------------------------------------------------------->
+                            <div class="col-6 mb-3">
+                                <label class="form-label">ชื่อตำบล (อังกฤษ)</label>
+                                <input type="text" class="form-control" formControlName="subDis_nameEn"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('subDis_nameEn')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_nameEn')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('subDis_nameEn')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 100 ตัวอักษร
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-end mt-2 mb-3">
+                            <button type="submit" class="btn btn-sm btn-success me-2 ps-3 pe-3"> บันทึก </button>
+                            <button class="btn btn-sm btn-danger me-2 ps-3 pe-3" *ngIf="sub_districtId" (click)="remove()">
+                                ลบ
+                            </button>
+                            <button class="btn btn-sm btn-secondary me-2 ps-3 pe-3"
+                                [routerLink]="['/springboot/sub-district']">
+                                ยกเลิก </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

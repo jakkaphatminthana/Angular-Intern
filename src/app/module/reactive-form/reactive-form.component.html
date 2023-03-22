@@ -1,0 +1,124 @@
+<!-- <div class="container">
+    <div class="row" [formGroup]="groupStudent">
+
+        <div class="mt-5 col-6">
+            <label>รหัสนักเรียน</label>
+            <input type="text" class="form-control" formControlName="studentCode"
+                [ngClass]="{'is-invalid': groupStudent.get('studentCode')?.errors}">
+            <div class="invalid-feedback" *ngIf="groupStudent.get('studentCode')?.hasError('required')">
+                กรุณากรอกข้อมูล.
+            </div>
+            <div class="invalid-feedback" *ngIf="groupStudent.get('studentCode')?.hasError('minlength')">
+                ต้องป้อนข้อมูลมากกว่า 2 ตัว.
+            </div>
+            <div class="invalid-feedback" *ngIf="groupStudent.get('studentCode')?.hasError('maxlength')">
+                ต้องป้อนข้อมูลไม่เกิน 5 ตัว.
+            </div>
+        </div>
+
+
+        <div class="mt-5 col-6">
+            <label>ชื่อ-นามสกุล</label>
+            <input type="text" class="form-control" formControlName="studentName">
+        </div>
+        {{groupStudent.value | json}}
+    </div>
+</div> -->
+
+<div class="container">
+    <div class="card mt-5 mb-5 ">
+        <div class="card-header">
+            ข้อมูลนักเรียน
+        </div>
+        <div class="card-body" [formGroup]=" groupStudent">
+            <div class="row">
+                <div class="mt-2 col-6">
+                    <label>รหัสนักเรียน</label>
+                    <input class="form-control" formControlName="studentCode"
+                        [ngClass]="{'is-invalid': groupStudent.get('studentCode')?.errors}">
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentCode')?.hasError('required')">
+                        กรุณากรอกข้อมูล
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentCode')?.hasError('minlength')">
+                        ต้องป้อนข้อมูลมากกว่า 2 ตัว
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentCode')?.hasError('maxlength')">
+                        ต้องป้อนข้อมูลไม่เกิน 5 ตัว
+                    </div>
+
+                </div>
+                <div class="mt-2 col-6">
+                    <label>ชื่อ-นามสกุล</label>
+                    <input class="form-control" formControlName="studentName"
+                        [ngClass]="{'is-invalid': groupStudent.get('studentName')?.errors}">
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentName')?.hasError('required')">
+                        กรุณากรอกข้อมูล
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentName')?.hasError('maxlength')">
+                        ต้องป้อนข้อมูลไม่เกิน 150 ตัว
+                    </div>
+
+                </div>
+                <div class="mt-2 col-6">
+                    <label>อายุ</label>
+                    <input type="number" class="form-control" formControlName="studentAge"
+                        [ngClass]="{'is-invalid': groupStudent.get('studentAge')?.errors}">
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentAge')?.hasError('required')">
+                        กรุณากรอกข้อมูล
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentAge')?.hasError('min')">
+                        อายุต้องมากกว่า 1 ปี
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('studentAge')?.hasError('max')">
+                        อายุต้องไม่เกิน 99 ปี
+                    </div>
+
+                </div>
+                <div class="mt-2 col-6">
+                    <label>ผลการเรียน </label>
+                    <input type="number" class="form-control" formControlName="gpa"
+                        [ngClass]="{'is-invalid': groupStudent.get('gpa')?.errors}">
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('gpa')?.hasError('required')">
+                        กรุณากรอกข้อมูล
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('gpa')?.hasError('min')">
+                        เกรดต้องมากกว่า 0.00
+                    </div>
+                    <div class="invalid-feedback" *ngIf="groupStudent.get('gpa')?.hasError('max')">
+                        เกรดต้องน้อยกว่า 4.00
+                    </div>
+                </div>
+
+                <div class="mt-3 col-6">
+                    <button type="button" class="btn btn-primary" (click)="save()"> บันทึก </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">รหัสนักเรียน</th>
+                <th scope="col">ชื่อ-นามสกุล</th>
+                <th scope="col">อายุ</th>
+                <th scope="col">ผลการเรียน</th>
+                <th scope="col">แก้ไข</th>
+                <th scope="col">ลบ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students; let i = index;">
+                <th scope="row">{{student.studentCode}}</th>
+                <td>{{student.studentName}}</td>
+                <td>{{student.studentAge}}</td>
+                <td>{{student.gpa}}</td>
+                <td><button class="btn btn-primary" (click)="edit(student)"> แก้ไข </button></td>
+                <td><button class="btn btn-danger" (click)="delete(i)"> ลบ </button></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,99 @@
+<div class="container">
+    <label class="fs-2 mt-5"> จัดการข้อมูลอำเภอ</label>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-3">
+                <!-- Header Card ------------------------------------------------------------------------------->
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-sm btn-success me-3 ps-4 pe-4"
+                                [routerLink]="['/address/district/create']"> เพิ่ม </button>
+                        </div>
+                        <div class="offset-8 col-2 justify-content-end">
+                            <button data-bs-target="#sidebar" data-bs-toggle="collapse"
+                                class="btn btn-sm btn-primary ps-3 pe-3 me-3">คัดกรอก</button>
+                            <button class="btn btn-sm btn-secondary ps-4 pe-4" (click)="clear()">ล้างค่า</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Sidebar ------------------------------------------------------------------------------->
+                            <form [formGroup]="formCriteria" (ngSubmit)="search()" #formSearch="ngForm">
+                                <div id="sidebar" class="collapse collapse-vertical show border-bottom">
+                                    <div id="sidebar-nav" class="list-group text-sm-start">
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="row d-flex justify-content-end">
+                                                    <div class="ms-2 col-auto">
+                                                        <label class="form-label mt-2">ประเทศ</label>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <select class="form-select" formControlName="countryData"
+                                                            (change)="countryChange()">
+                                                            <option *ngFor="let country of countriesData"
+                                                                [value]="country.countryId">{{country.countryName}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="ms-2 col-auto">
+                                                        <label class="form-label mt-2">จังหวัด</label>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <select class="form-select" formControlName="provinceData"
+                                                            [attr.disabled]="formCriteria.value.countryData ? null : ''">
+                                                            <option *ngFor="let province of provincesData"
+                                                                [value]="province.provinceId">{{province.provinceName}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-1 mt-1">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-info ps-4 pe-4">ค้นหา</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Body Card ------------------------------------------------------------------------------->
+                        <div class="col-12">
+                            <main class="col ps-md-2 pt-2">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">รหัสอำเภอ</th>
+                                            <th scope="col">ชื่ออำเภอ</th>
+                                            <th scope="col">จังหวัด</th>
+                                            <th scope="col">ประเทศ</th>
+                                            <th scope="col">แก้ไข</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let district of districtsList">
+                                            <th scope="row">{{district.districtId}}</th>
+                                            <td>{{district.districtName}}</td>
+                                            <td>{{provinceToDescription(district.provinceId)}}</td>
+                                            <td>{{countryToDescription(district.countryId)}}</td>
+                                            <td><a
+                                                    [routerLink]="['/address/district/edit/' + district.districtId]">Edit</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

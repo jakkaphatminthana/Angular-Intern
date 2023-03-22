@@ -1,0 +1,207 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <form [formGroup]="formData" (ngSubmit)="save()" #formAdd="ngForm">
+                    <div class="card-header">
+                        <label class="col-form-label"><b>เพิ่ม/แก้ไข ข้อมูลนักศึกษา</b> </label>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-12">
+                                <div class="label fs-4 mb-3 mt-1"><b>ส่วนที่ 1: ข้อมูลนักศึกษา</b></div>
+                            </div>
+                            <!-- Id --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">รหัสนักศึกษา</label>
+                                <input type="text" class="form-control" formControlName="studentId"
+                                    [readOnly]="studentId?true:false"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('studentId')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentId')?.hasError('minlength')">
+                                    ป้อนข้อมูล 3 ตัวขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentId')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 10 ตัว
+                                </div>
+                            </div>
+
+                            <!-- FirstName --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">ชื่อ</label>
+                                <input type="text" class="form-control" formControlName="studentFirstName"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('studentFirstName')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentFirstName')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentFirstName')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 40 ตัวอักษร
+                                </div>
+                            </div>
+
+                            <!-- LastName --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">นามสกุล</label>
+                                <input type="text" class="form-control" formControlName="studentLastName"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('studentLastName')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentLastName')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentLastName')?.hasError('maxlength')">
+                                    ป้อนข้อมูลไม่เกิน 40 ตัวอักษร
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+
+                            <!-- Class Year --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">ชั้นปีที่ศึกษา </label>
+                                <input type="number" class="form-control" formControlName="studentYearClass"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('studentYearClass')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentYearClass')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentYearClass')?.hasError('min')">
+                                    ป้อนข้อมูล 1 ขึ้นไป
+                                </div>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentYearClass')?.hasError('max')">
+                                    ป้อนข้อมูลไม่เกิน 9
+                                </div>
+                            </div>
+
+                            <!-- Faculty --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">คณะเรียน</label>
+                                <input type="text" class="form-control" formControlName="studentFaculty"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('studentFaculty')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentFaculty')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Faculty --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">สาขาวิชา</label>
+                                <input type="text" class="form-control" formControlName="studentMajor"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('studentMajor')?.errors}">
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('studentMajor')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="col-12">
+                                <div class="label fs-4 mb-3 mt-5"><b>ส่วนที่ 2: ที่อยู่อาศัย</b></div>
+                            </div>
+                            <!-- Country --------------------------------------------------------------------------->
+                            <div class="col-3 mb-3">
+                                <label class="form-label">เลือกประเทศ</label>
+                                <select class="form-select" formControlName="countryId" (change)="countryChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('countryId')?.errors}">
+                                    <option *ngFor="let countryName of countryData" [value]="countryName.countryId">
+                                        {{countryToDescription(countryName.countryId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('countryId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Province --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">เลือกจังหวัด</label>
+                                <select class="form-select" formControlName="provinceId" (change)="provinceChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('provinceId')?.errors}"
+                                    [attr.disabled]="formData.value.countryId ? null : ''">
+                                    <option *ngFor="let provinceName of provinceData" [value]="provinceName.provinceId">
+                                        {{provinceToDescription(provinceName.provinceId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('provinceId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- District --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">เลือกอำเภอ</label>
+                                <select class="form-select" formControlName="districtId" (change)="districtChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('districtId')?.errors}"
+                                    [attr.disabled]="formData.value.provinceId ? null : ''">
+                                    <option *ngFor="let districtName of districtData" [value]="districtName.districtId">
+                                        {{districtToDescription(districtName.districtId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('districtId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Sub District --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">เลือกตำบล</label>
+                                <select class="form-select" formControlName="sub_districtId"
+                                    (change)="subDistrictChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('sub_districtId')?.errors}"
+                                    [attr.disabled]="formData.value.districtId ? null : ''">
+                                    <option *ngFor="let sub_districtName of sub_districtData"
+                                        [value]="sub_districtName.sub_districtId">
+                                        {{subDistrictToDescription(sub_districtName.sub_districtId)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('sub_districtId')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+                            <!-- Postcode --------------------------------------------------------------------------->
+                            <div class="col-2 mb-3">
+                                <label class="form-label">รหัสไปรษณีย์</label>
+                                <select class="form-select" formControlName="postcode" (change)="subDistrictChange()"
+                                    [ngClass]="{'is-invalid': formAdd.submitted && formData.get('postcode')?.errors}"
+                                    [attr.disabled]="formData.value.sub_districtId ? null : ''">
+                                    <option *ngFor="let postcode of postcodeData" [value]="postcode.postcode">
+                                        {{postcodeToDescription(postcode.postcode)}}</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="formAdd.submitted && formData.get('postcode')?.hasError('required')">
+                                    กรุณาป้อนข้อมูล
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="d-flex justify-content-start mt-2 mb-3">
+                            <button type="submit" class="btn btn-sm btn-success me-2 ps-3 pe-3"> บันทึก </button>
+                            <button class="btn btn-sm btn-danger me-2 ps-3 pe-3" *ngIf="studentId" (click)="remove()">
+                                ลบ
+                            </button>
+                            <button class="btn btn-sm btn-secondary me-2 ps-3 pe-3" [routerLink]="['/student']">
+                                ยกเลิก </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

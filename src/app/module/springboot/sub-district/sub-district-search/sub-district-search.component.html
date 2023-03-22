@@ -1,0 +1,55 @@
+<div class="container">
+    <label class="fs-2 mt-5"> จัดการข้อมูลตำบล</label>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-sm btn-success me-3 ps-4 pe-4"
+                                [routerLink]="['/springboot/sub-district/create']"> เพิ่ม </button>
+                        </div>
+                        <div class=" offset-5 col-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" style="height: 30px" #districtId_Input
+                                        placeholder="รหัสอำเภอ">
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-sm btn-primary w-100" (click)="filter(districtId_Input.value)"> ค้นหา
+                                    </button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-sm btn-primary w-100" (click)="clear()"> ล้างค่า
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#รหัสตำบล</th>
+                                <th scope="col">ชื่อตำบล (TH)</th>
+                                <th scope="col">อำเภอ</th>
+                                <th scope="col">จังหวัด</th>
+                                <th scope="col">แก้ไข</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sub_district of sub_districtsList">
+                                <th scope="row">{{sub_district.subdistrictId}}</th>
+                                <td>{{sub_district.subdistrictName}}</td>
+                                <td>{{sub_district.district.districtName}}</td>
+                                <td>{{sub_district.district.province.provinceName}}</td>
+                                <td><a [routerLink]="['/springboot/sub-district/edit/' + '']">Edit</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
