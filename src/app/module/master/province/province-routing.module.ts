@@ -6,7 +6,7 @@ import { ProvinceListComponent } from './province-list/province-list.component';
 const routes: Routes = [
   {path: '', component: ProvinceListComponent},
   {path: 'new', component: ProvinceFormComponent},
-  {path: 'update/:id', component: ProvinceFormComponent},
+  {path: 'edit/:provinceId', component: ProvinceFormComponent},
 ];
 
 @NgModule({

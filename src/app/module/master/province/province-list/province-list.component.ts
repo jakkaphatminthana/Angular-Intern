@@ -17,7 +17,7 @@ export class ProvinceListComponent implements OnInit {
   totalPages: number = 0;
   totalElements: number = 0;
   pageNumber: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 7;
   pageData: any[] = [];
 
   constructor(

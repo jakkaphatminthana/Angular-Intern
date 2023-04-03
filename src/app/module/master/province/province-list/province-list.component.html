@@ -4,7 +4,17 @@
             <!-- Card 1 --------------------------------------------------------------------------->
             <div class="card">
                 <div class="card-header">
-                    <label class="col-form-label">เงื่อนไขการค้นหา</label>
+                    <!-- between text and button -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label class="form-label"> เงื่อนไขการค้นหา </label>
+                        </div>
+                        <div class=" offset-7 col-3 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-sm btn-success me-3 ps-4 pe-4"
+                                [routerLink]="['/master/province/new']"> เพิ่มข้อมูล </button>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="card-body">
                     <form [formGroup]="formgroupCriteria" (ngSubmit)="onSearch()" #formCriteria="ngForm">
@@ -25,7 +35,8 @@
                             <!-- {{formgroupCriteria.value | json}} -->
                         </div>
                         <div class="d-flex justify-content-center mt-4 mb-3">
-                            <button class="btn btn-sm btn-secondary me-3 ps-5 pe-5" (click)="reset()"> ล้างค่า </button>
+                            <button class="btn btn-sm btn-secondary me-3 ps-5 pe-5" (click)="reset()"> ล้างค่า
+                            </button>
                             <button type="submit" class="btn btn-sm btn-primary me-3 ps-5 pe-5"> ค้นหา </button>
 
                         </div>
@@ -47,6 +58,7 @@
                                 <th scope="col">#รหัสจังหวัด</th>
                                 <th scope="col">ชื่อจังหวัด</th>
                                 <th scope="col">สถานะ</th>
+                                <th scope="col">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,17 +66,18 @@
                                 <th scope="row">{{province.provinceId}}</th>
                                 <td>{{province.provinceName}}</td>
                                 <td>{{province.active}}</td>
+                                <td><a [routerLink]="['/master/province/edit/' + province.provinceId]">Edit</a></td>
                             </tr>
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
                         <ul class="d-flex justify-content-center pagination">
-                            <li class="page-item"><button class="page-link" >Previous</button></li>
+                            <li class="page-item"><button class="page-link">Previous</button></li>
 
                             <li class="page-item" *ngFor="let page of pagingDataElement; let i = index">
-                                <button class="page-link" (click)="goToPage(i)" 
-                                [disabled]="i == pageNumber"
-                                [ngClass]="{'active': i == pageNumber}">{{i+1}}</button></li>
+                                <button class="page-link" (click)="goToPage(i)" [disabled]="i == pageNumber"
+                                    [ngClass]="{'active': i == pageNumber}">{{i+1}}</button>
+                            </li>
 
                             <li class="page-item"><button class="page-link">Next</button></li>
                         </ul>

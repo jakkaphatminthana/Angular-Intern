@@ -9,11 +9,7 @@ export class ProvinceService {
 
   private serviceUrl: string = environment.apiUrl + '/province'
 
-  constructor(
-    private http:HttpClient,
-  ) { 
-
-  }
+  constructor(private http:HttpClient) {}
 
   //Find-all
   public all() {

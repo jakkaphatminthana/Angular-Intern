@@ -6,7 +6,7 @@ import { DistrictListComponent } from './district-list/district-list.component';
 const routes: Routes = [
   {path: '', component: DistrictListComponent},
   {path: 'new', component: DistrictFormComponent},
-  {path: 'update/:id', component: DistrictFormComponent},
+  {path: 'edit/:districtId', component: DistrictFormComponent},
 ];
 
 @NgModule({
